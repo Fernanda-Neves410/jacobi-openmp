@@ -11,6 +11,8 @@ int main() {
     vector<int> num_threads_teste = {1, 2, 4, 6, 8, 12};
     int max_iter = 1000;
     int i, j;
+    double temp_inicial, temp_final, temp_total, 
+            speedup, eficiencia;
 
     // alterar tamanho da matriz
     int n = 5;
@@ -26,18 +28,29 @@ int main() {
         }
         b[i] = (rand() % 50) + 1; 
     }
-    
-    //  printa num de threads e valores de x
-    //  printa tempo
-    for(int threads : num_threads_teste) {
-        double temp_inicio = omp_get_wtime();
-        auto resultado = jacobi_paralelo(A, b, max_iter, epsilon, threads);
-        double temp_final = omp_get_wtime();
-        double tempo_total = temp_final - temp_inicio;
 
+    //  sequencial
+    temp_inicial = omp_get_wtime();
+    auto resultado = jacobi_sequencial(A, b, max_iter, epsilon);
+    temp_final = omp_get_wtime();
+    temp_total = temp_final - temp_inicial;
+    double temp_seq = temp_total;
+
+    //  paralelo
+    //  printa num de threads e valores de x
+    //  printa tempo, speedup e (speedup / threads)
+    for(int threads : num_threads_teste) {
+        temp_inicial = omp_get_wtime();
+        auto resultado = jacobi_paralelo(A, b, max_iter, epsilon, threads);
+        temp_final = omp_get_wtime();
+        temp_total = temp_final - temp_inicial;
+
+        speedup = temp_seq / temp_total;
+        eficiencia = speedup / threads;
 
         cout << "Threads: " << threads;
-        cout << "   Tempo: " << tempo_total << "s" << "\n";
+        cout << "   Tempo: " << temp_total << "s" << "\n";
+        cout << "Speedup: " << speedup <<"X     " << "Eficiencia: " << eficiencia << "\n";
         for(i = 0; i < n; i++)
             cout << "x[" << i << "]=" << resultado[i] << "  ";
         cout << "\n\n";
