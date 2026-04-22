@@ -8,11 +8,11 @@
 
 int main() {
     double epsilon = 1e-6;
-    int num_threads = 2;
+    vector<int> num_threads_teste = {1, 2, 4, 6, 8, 12};
     int max_iter = 1000;
 
     // alterar tamanho da matriz
-    int n = 20;
+    int n = 5;
     
     //  cria matriz aleatória
     vector<vector<double>> A(n, vector<double>(n, 0.0));
@@ -21,13 +21,22 @@ int main() {
     
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            A[i][j] = (rand() % 10) + 1; 
+            A[i][j] = (rand() % 10) + 1;
         }
         b[i] = (rand() % 50) + 1; 
     }
     
-    auto resultado = jacobi_paralelo(A, b, max_iter, epsilon, num_threads);
-    cout << "x1 = " << resultado[0] << ", x2 = " << resultado[1] << endl;
+    //  printa num de threads e valores de x
+    for(int threads : num_threads_teste) {
+        auto resultado = jacobi_paralelo(A, b, max_iter, epsilon, threads);
+
+        cout << "Threads: " << threads << endl;
+
+    for(int i = 0; i < n; i++){
+        cout << "x[" << i << "]=" << resultado[i] << "  ";
+    }
+        cout << endl;
+    }
     
 
     return 0;
