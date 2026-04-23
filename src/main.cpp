@@ -24,9 +24,9 @@ int main() {
     vector<vector<double>> A(n, vector<double>(n, 0.0));
     vector<double> b(n, 0.0);
 
-    for (int i = 0; i < n; i++) {
+    for (i = 0; i < n; i++) {
             double soma_linha = 0.0;
-            for (int j = 0; j < n; j++) {
+            for (j = 0; j < n; j++) {
                 if (i != j) {
                     A[i][j] = 1.0; 
                     soma_linha += A[i][j];
@@ -36,20 +36,6 @@ int main() {
             b[i] = (i + 1) * 2.0; 
     }
         
-    /*
-    //  cria matriz aleatória
-    vector<vector<double>> A(n, vector<double>(n, 0.0));
-    vector<double> b(n, 0.0);
-    srand(time(NULL)); 
-    
-    for (i = 0; i < n; i++) {
-        for (j = 0; j < n; j++) {
-            A[i][j] = (rand() % 10) + 1;
-        }
-        b[i] = (rand() % 50) + 1; 
-    }
-    */
-
     //  sequencial
     temp_inicial = omp_get_wtime();
     auto resultado = jacobi_sequencial(A, b, max_iter, epsilon);
