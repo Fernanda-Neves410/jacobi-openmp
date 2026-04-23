@@ -17,6 +17,10 @@ int main() {
     // alterar tamanho da matriz
     int n = 200;
 
+    // Gera uma matriz diagonal dominante
+    // Cria todos os elementos da matriz com valor 1.0
+    // Add (soma de todos os elementos da linha + 0.5) nos elementos da diagonal principal
+    // valores de b = {2, 4, 8, 10, ...)
     vector<vector<double>> A(n, vector<double>(n, 0.0));
     vector<double> b(n, 0.0);
 
