@@ -15,8 +15,24 @@ int main() {
             speedup, eficiencia;
 
     // alterar tamanho da matriz
-    int n = 5;
-    
+    int n = 200;
+
+    vector<vector<double>> A(n, vector<double>(n, 0.0));
+    vector<double> b(n, 0.0);
+
+    for (int i = 0; i < n; i++) {
+            double soma_linha = 0.0;
+            for (int j = 0; j < n; j++) {
+                if (i != j) {
+                    A[i][j] = 1.0; 
+                    soma_linha += A[i][j];
+                }
+            }
+            A[i][i] = soma_linha + 0.5; 
+            b[i] = (i + 1) * 2.0; 
+    }
+        
+    /*
     //  cria matriz aleatória
     vector<vector<double>> A(n, vector<double>(n, 0.0));
     vector<double> b(n, 0.0);
@@ -28,6 +44,7 @@ int main() {
         }
         b[i] = (rand() % 50) + 1; 
     }
+    */
 
     //  sequencial
     temp_inicial = omp_get_wtime();
@@ -35,6 +52,7 @@ int main() {
     temp_final = omp_get_wtime();
     temp_total = temp_final - temp_inicial;
     double temp_seq = temp_total;
+    cout << "Tempo sequencial: " << temp_seq << "s\n\n";
 
     //  paralelo
     //  printa num de threads e valores de x
