@@ -9,21 +9,21 @@
 int main() {
     double epsilon = 1e-6;
     vector<int> num_threads_teste = {1, 2, 4, 6, 8, 12};
-    int max_iter = 1000;
+    int max_iter = 3000;
     int i, j;
     double temp_inicial, temp_final, temp_total, 
             speedup, eficiencia;
 
     // alterar tamanho da matriz
-    int n = 200;
+    int n = 150;
 
-    // Gera uma matriz diagonal dominante
-    // Cria todos os elementos da matriz com valor 1.0
-    // Add (soma de todos os elementos da linha + 0.5) nos elementos da diagonal principal
-    // valores de b = {2, 4, 8, 10, ...)
     vector<vector<double>> A(n, vector<double>(n, 0.0));
     vector<double> b(n, 0.0);
 
+    // Gera uma matriz diagonal dominante
+    // Cria todos os elementos da matriz com valor 1.0
+    // Add (soma de todos os elementos da linha + 1.0) nos elementos da diagonal principal
+    // valores de b = {2, 4, 8, 10, ...)
     for (i = 0; i < n; i++) {
             double soma_linha = 0.0;
             for (j = 0; j < n; j++) {
@@ -32,10 +32,10 @@ int main() {
                     soma_linha += A[i][j];
                 }
             }
-            A[i][i] = soma_linha + 0.5; 
+            A[i][i] = soma_linha + 1.0; 
             b[i] = (i + 1) * 2.0; 
     }
-        
+
     //  sequencial
     temp_inicial = omp_get_wtime();
     auto resultado = jacobi_sequencial(A, b, max_iter, epsilon);
@@ -59,9 +59,12 @@ int main() {
         cout << "Threads: " << threads;
         cout << "   Tempo: " << temp_total << "s" << "\n";
         cout << "Speedup: " << speedup <<"X     " << "Eficiencia: " << eficiencia << "\n";
+
+        /*
         for(i = 0; i < n; i++)
-            cout << "x[" << i << "]=" << resultado[i] << "  ";
-        cout << "\n\n";
+        cout << "x[" << i << "]=" << resultado[i] << "  ";
+        */
+        cout << "\n";
     }
     
 
