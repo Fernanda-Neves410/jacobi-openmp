@@ -31,18 +31,20 @@ vector<double> jacobi_sequencial(
         }
 
         // Calcula erro
-        double erro = 0.0;
+        double erro_max = 0.0;
         for (int i = 0; i < n; i++) {
-            erro += fabs(x_new[i] - x_old[i]);
+            double erro = fabs(x_new[i] - x_old[i]);
+            if (erro > erro_max) {
+                erro_max = erro;
+            }
         }
 
         // Verifica convergência
-        if (erro < epsilon) {
+        if (erro_max < epsilon) {
             cout << "Convergiu em " << k + 1 << " iteracoes.\n";
             break;
         }
 
-        // Atualiza vetor
         x_old = x_new;
     }
 
