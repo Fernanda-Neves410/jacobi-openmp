@@ -59,12 +59,6 @@ int main() {
         cout << "Threads: " << threads;
         cout << "   Tempo: " << temp_total << "s" << "\n";
         cout << "Speedup: " << speedup <<"X     " << "Eficiencia: " << eficiencia << "\n";
-
-        /*
-        for(i = 0; i < n; i++)
-        cout << "x[" << i << "]=" << resultado[i] << "  ";
-        */
-        cout << "\n";
     }
     
 
