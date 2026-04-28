@@ -15,7 +15,7 @@ int main() {
             speedup, eficiencia;
 
     // alterar tamanho da matriz
-    int n = 150;
+    int n = 400;
 
     vector<vector<double>> A(n, vector<double>(n, 0.0));
     vector<double> b(n, 0.0);
