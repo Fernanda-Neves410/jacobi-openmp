@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/User/jacobi-openmp/src",
-      "program": "c:/Users/User/jacobi-openmp/src/build/Debug/outDebug",
+      "cwd": "${workspaceFolder}/src",
+      "program": "${workspaceFolder}/src/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
